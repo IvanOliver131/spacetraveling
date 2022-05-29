@@ -139,6 +139,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     // ),
     data: {
       title: response.data.title,
+      subtitle: response.data.subtitle,
       banner: {
         url: response.data.banner.url,
       },
