@@ -1,28 +1,8 @@
 .headerContainer {
-  height: 3rem;
-}
-
-.headerContent {
   max-width: 1120px;
-  height: 8rem;
-  margin: 0 auto;
   padding: 0 2rem;
+  margin: 5rem auto;
 
   display: flex;
   align-items: center;
-
-  .headerIcon {
-    font-size: 3rem;
-    color: var(--pink-500);
-  }
-
-  span, a {
-    margin: 4px 0px 0px 5px;
-    font-size: 2rem;
-    font-weight: bold;
-  }
-
-  .headerPoint {
-    color: var(--pink-500);
-  }
 }

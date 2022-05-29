@@ -37,6 +37,13 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
   const postsGetStatics = postsPagination.results.map(post => {
     return {
       ...post,
+      first_publication_date: format(
+        new Date(post.first_publication_date),
+        'dd MMM yyyy',
+        {
+          locale: ptBR,
+        }
+      ),
     };
   });
 
@@ -58,7 +65,7 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
           ...post,
           first_publication_date: format(
             new Date(post.first_publication_date),
-            'dd LLLL yyyy',
+            'dd MMM yyyy',
             {
               locale: ptBR,
             }
@@ -73,28 +80,32 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
       <Header />
 
       <main className={styles.homeContainer}>
-        {posts.map((post: Post) => {
-          return (
-            <Link key={post.uid} href={`/post/${post.uid}`}>
-              <div key={post.uid} className={styles.homePreviewPosts}>
-                <h1>{post.data.title}</h1>
-                <span>{post.data.subtitle}</span>
+        <ul>
+          {posts.map((post: Post) => {
+            return (
+              <li key={post.uid}>
+                <Link href={`/post/${post.uid}`}>
+                  <div className={styles.homePreviewPosts}>
+                    <h1>{post.data.title}</h1>
+                    <span>{post.data.subtitle}</span>
 
-                <div className={styles.homeFooterPreviewPosts}>
-                  <div>
-                    <FaCalendar />
-                    <span>{post.first_publication_date}</span>
-                  </div>
+                    <div className={styles.homeFooterPreviewPosts}>
+                      <div>
+                        <FaCalendar />
+                        <span>{post.first_publication_date}</span>
+                      </div>
 
-                  <div>
-                    <FaUser />
-                    <span>{post.data.author}</span>
+                      <div>
+                        <FaUser />
+                        <span>{post.data.author}</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
 
         {nextPage && (
           <a className={styles.homeLoadMorePosts} onClick={handleNextPage}>
@@ -110,16 +121,17 @@ export const getStaticProps: GetStaticProps = async () => {
   const prismic = getPrismicClient({});
   const postResponse = await prismic.getByType('posts', { pageSize: 5 });
 
-  const listPosts = postResponse.results.map(post => {
+  const posts = postResponse.results.map(post => {
     return {
       uid: post.uid,
-      first_publication_date: format(
-        new Date(post.last_publication_date),
-        'dd LLLL yyyy',
-        {
-          locale: ptBR,
-        }
-      ),
+      first_publication_date: post.first_publication_date,
+      // first_publication_date: format(
+      //   new Date(post.last_publication_date),
+      //   'dd LLLL yyyy',
+      //   {
+      //     locale: ptBR,
+      //   }
+      // ),
       data: {
         title: post.data.title,
         subtitle: post.data.subtitle,
@@ -131,7 +143,7 @@ export const getStaticProps: GetStaticProps = async () => {
   // o next_page pega a proxima página
   const postsPagination = {
     next_page: postResponse.next_page,
-    results: listPosts,
+    results: posts,
   };
 
   return {
