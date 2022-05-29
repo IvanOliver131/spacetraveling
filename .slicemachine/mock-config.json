@@ -1,0 +1,17 @@
+{
+  "slices": {
+    "Posts": {}
+  },
+  "_cts": {
+    "posts": {
+      "content": {
+        "body": {
+          "config": {
+            "patternType": "PARAGRAPH",
+            "blocks": 1
+          }
+        }
+      }
+    }
+  }
+}

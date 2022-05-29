@@ -1,0 +1,52 @@
+.imgDiv {
+  margin-top: 5rem;
+  height: 350px;
+
+  .imgPost {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.postContainer {
+  max-width: 1120px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  span {
+    font-size: 1.1rem;
+    color: var(--gray-300);
+  }
+
+  .postSubTitleIcons {
+    margin-top: 2.5rem;
+    color: var(--gray-300);
+
+    display: flex;
+    flex-direction: row;
+
+    gap: 2rem;
+
+    span {
+      margin: 5px;
+    }
+  }
+
+  .postArticle {
+    margin-top: 4rem;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    main {
+      margin-top: 1rem;
+      color: var(--gray-300);
+      font-size: 1rem;
+    }
+  }
+}
